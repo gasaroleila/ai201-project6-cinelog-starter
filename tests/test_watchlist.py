@@ -7,7 +7,7 @@ Tests for the watchlist service — add_to_watchlist functionality.
 import pytest
 from app import create_app, db
 from models import User, Film, WatchlistEntry
-from services.watchlist_service import add_to_watchlist, AlreadyInWatchListError
+from services.watchlist_service import add_to_watchlist, get_watchlist, AlreadyInWatchListError
 from services.collection_service import FilmNotFoundError
 
 
@@ -117,3 +117,35 @@ def test_add_to_watchlist_sets_date_added(app, sample_user, sample_film):
     with app.app_context():
         entry = add_to_watchlist(user_id=sample_user, film_id=sample_film)
         assert entry.date_added is not None
+
+
+# -- Sort order ----------------------------------------------------------------
+
+def test_get_watchlist_returns_newest_first(app, sample_user):
+    """
+    get_watchlist() should return films sorted by date_added descending
+    (most recently added first).
+    """
+    with app.app_context():
+        from datetime import datetime, timezone, timedelta
+
+        film_a = Film(title="Alien", year=1979, genre="Horror")
+        film_b = Film(title="Blade Runner", year=1982, genre="Sci-Fi")
+        film_c = Film(title="Casablanca", year=1942, genre="Drama")
+        db.session.add_all([film_a, film_b, film_c])
+        db.session.commit()
+
+        oldest = datetime.now(timezone.utc) - timedelta(days=10)
+        middle = datetime.now(timezone.utc) - timedelta(days=5)
+        newest = datetime.now(timezone.utc)
+
+        entry_a = WatchlistEntry(user_id=sample_user, film_id=film_a.id, date_added=oldest)
+        entry_b = WatchlistEntry(user_id=sample_user, film_id=film_b.id, date_added=newest)
+        entry_c = WatchlistEntry(user_id=sample_user, film_id=film_c.id, date_added=middle)
+        db.session.add_all([entry_a, entry_b, entry_c])
+        db.session.commit()
+
+        watchlist = get_watchlist(sample_user)
+        titles = [f["title"] for f in watchlist]
+
+        assert titles == ["Blade Runner", "Casablanca", "Alien"]

@@ -97,10 +97,9 @@ test_collection including: test_add_to_watchlist_creates_entry, test_add_to_watc
 **Tradeoff acknowledged:**The only overhead this would cause is having to track user setting on this watchlist visibility, and having users take an extra step to make it visible before being able to share it with other which might reduced social engagement on the platform.
 
 ## Comment 5 — Sort order
-
-**My position:**
-**Reasoning:**
-**Engagement with reviewer's point:**
+**My position:**I would agree with defaulting to date added.
+**Reasoning:**because if a user saves a film to watchlist, they wouldn’t bother knowing the name of that film because they saved it for later. So sorting by the title wouldn’t help them get what they want, but rather with the date, they would be like, “the one I added recently”
+**Engagement with reviewer's point:**As explained above, I agree with the reviewers point.
 
 ## Comment 6 — Rebase
 
