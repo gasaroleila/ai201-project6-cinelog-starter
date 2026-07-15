@@ -1,8 +1,7 @@
 # PR Response Doc — CineLog Watchlist Feature
 
 ## AI Usage
-
-<!-- Fill in at the end — how you used AI tools during this project -->
+Used Claude Code to seed the database with test data (users and films), then manually test all watchlist endpoints via curl including add to watchlist, view watchlist, and duplicate detection. Claude identified two bugs during testing: a missing film relationship on WatchlistEntrycausing the view endpoint to crash with an AttributeError, and the route not catching AlreadyInWatchListError resulting in raw 500s instead of 409 responses. Claude also fixed the WatchlistEntry.film_id column type from Integer to String(36)to match the UUID-based Film.id after the main branch refactor, wrote a test to verify watchlist sort order by date_added, and generated the PR description.
 
 ## Comment 1 — Rename
 
