@@ -92,10 +92,9 @@ test_collection including: test_add_to_watchlist_creates_entry, test_add_to_watc
 **How I verified:**Run pytest tests/test_watchlist.py -v and the 5 watchlist test cases passed, run the whole test suite as well to verify that nothing broke and all the total 9 test cases passed.
 
 ## Comment 4 — Default visibility
-
-**My position:**
-**Reasoning:**
-**Tradeoff acknowledged:**
+**My position:**I would lean towards making it default=False
+**Reasoning:**Default=False gives users who want to share it publicly the option to turn it off, but those who want to prioritize their privacy too are not forced to have just a publicly visible watchlist.
+**Tradeoff acknowledged:**The only overhead this would cause is having to track user setting on this watchlist visibility, and having users take an extra step to make it visible before being able to share it with other which might reduced social engagement on the platform.
 
 ## Comment 5 — Sort order
 
