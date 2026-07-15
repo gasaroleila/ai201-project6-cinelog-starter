@@ -86,9 +86,10 @@ Request: POST /watchlist/<user_id>/add
 ```
 
 ## Comment 3 — Missing test
-
-**What I did:**
-**How I verified:**
+**What I did:**Added more tests for watchlist following the test structure of
+test_add_to_watchlist_duplicate_raises
+test_collection including: test_add_to_watchlist_creates_entry, test_add_to_watchlist_nonexistent_film_raises, test_add_to_watchlist_sets_default_public and test_add_to_watchlist_sets_date_added
+**How I verified:**Run pytest tests/test_watchlist.py -v and the 5 watchlist test cases passed, run the whole test suite as well to verify that nothing broke and all the total 9 test cases passed.
 
 ## Comment 4 — Default visibility
 
