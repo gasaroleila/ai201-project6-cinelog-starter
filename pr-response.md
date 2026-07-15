@@ -103,9 +103,9 @@ test_collection including: test_add_to_watchlist_creates_entry, test_add_to_watc
 
 ## Comment 6 — Rebase
 
-**What conflicted:**
-**How I resolved it:**
-**How I verified no conflict remains:**
+**What conflicted:**The .gitignore that was commited before didn't have .pytest_cache/ so that created a conflict. Models.py also had a conflict because of the addition of WatchListEntry model.
+**How I resolved it:**Used interactive editor to accept the current changes, and at each point had to continue the rebase
+**How I verified no conflict remains:**Run all tests again to verify that nothing broke. And checked VS Code's version control that no conflicts exist. 
 
 ## PR Description
 
